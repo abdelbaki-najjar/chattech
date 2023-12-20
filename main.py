@@ -39,7 +39,7 @@ def get_chatmodel_response(question):
 
 for message in conversation[1:]:
     if message.type == 'human':
-            with st.chat_message(message.type, avatar = "🧑‍💻"):
+            with st.chat_message(message.type, avatar="🤔"):
                 st.write(message.content)
     else:
              with st.chat_message(message.type):
@@ -50,7 +50,7 @@ for message in conversation[1:]:
 prompt = st.chat_input("أرجوك حاول أن تجعل سؤالك واضحا قدر الإمكان")
 if prompt:
     # Display user message in chat message container
-        with st.chat_message("user"):
+        with st.chat_message("user", avatar="🤔"):
             st.markdown(prompt)
     # Add user message to chat history
         response = get_chatmodel_response(prompt)
