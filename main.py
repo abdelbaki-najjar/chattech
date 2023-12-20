@@ -38,8 +38,12 @@ def get_chatmodel_response(question):
 
 
 for message in conversation[1:]:
-    with st.chat_message(message.type):
-        st.write(message.content)
+    if message.type == 'human':
+            with st.chat_message(message.type, avatar = "🧑‍💻"):
+                st.write(message.content)
+    else:
+             with st.chat_message(message.type):
+                st.write(message.content)
 
 
 #input=st.text_input("Input: ",key="input")
