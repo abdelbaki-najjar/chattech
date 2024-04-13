@@ -30,11 +30,19 @@ conversation = st.session_state['flowmessages']
 ## Function to load OpenAI model and get respones
 
 def get_chatmodel_response(question):
+    try:
+        conversation.append(HumanMessage(content=question))
+        answer = chat(conversation)
+        conversation.append(AIMessage(content=answer.content))
+        return answer.content
+    except OpenAIError as e:
+        if 'rate limits' in str(e):
+            return "نعتذر، لقد تجاوزنا الحد المجاني للاستخدام. سيعود التطبيق للعمل قريبًا، يرجى المحاولة لاحقًا."
+        else:
+            raise e
 
-    conversation.append(HumanMessage(content=question))
-    answer=chat(conversation)
-    conversation.append(AIMessage(content=answer.content))
-    return answer.content
+   
+        
 
 
 for message in conversation[1:]:
